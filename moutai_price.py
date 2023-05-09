@@ -3,7 +3,7 @@
 
 """
 cron: 1 7 * * *
-new Env('茅台价格')
+new Env('茅台行情')
 """
 
 import requests,time,os,base64
