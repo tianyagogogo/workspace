@@ -10,6 +10,7 @@ import time
 import requests
 import base64
 import json
+import os
 from datetime import datetime
 import cloudscraper
 
@@ -17,8 +18,8 @@ import cloudscraper
 cookie = os.environ["tly_cookie"]
 token = os.environ["bhshare_token"]
 
-#绕过cf 5秒盾
 scraper = cloudscraper.create_scraper()
+
 
 #token在http://www.bhshare.cn/imgcode/ 自行申请
 
@@ -47,6 +48,9 @@ def getmidstring(html, start_str, end):
         if end >= 0:
             return html[start:end].strip()
 
+
+
+
 def tly():
     signUrl="https://tly.com/modules/index.php"
     hearder={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36','Cookie':cookie}
@@ -71,8 +75,16 @@ def tly():
     else:
         print("还未到时间！",t-timeStamp)
 
+
 def main_handler(event, context):
     tly()
 
+
 if __name__ == '__main__':
+
     tly()
+
+
+
+
+
