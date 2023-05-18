@@ -13,33 +13,14 @@ import json
 import os
 from datetime import datetime
 import cloudscraper
+from typing import BinaryIO , Dict , List , Union
 from notify import send
 
 cookie = os.environ["tly_cookie"]
-token = os.environ["bhshare_token"]
 userid = os.environ["userid"]
 apikey = os.environ["apikey"]
 
 scraper = cloudscraper.create_scraper()
-
-
-#token在http://www.bhshare.cn/imgcode/ 自行申请
-
-def imgcode_online(imgurl):
-    data = {
-        'token': token,
-        'type': 'online',
-        'uri': imgurl
-    }
-    response = scraper.post('http://www.bhshare.cn/imgcode/', data=data)
-    print(response.text)
-    result = json.loads(response.text)
-    if result['code'] == 200:
-        print(result['data'])
-        return result['data']
-    else:
-        print(result['msg'])
-        return 'error'
 
 
 def apitruecaptcha(content : BinaryIO) -> str:
@@ -50,14 +31,14 @@ def apitruecaptcha(content : BinaryIO) -> str:
         'userid':userid,
         'apikey':apikey
     }
-    result = requests.post(url, json.dumps(data), proxies = proxies)
+    result = requests.post(url, json.dumps(data))
     res=result.json()
     try:
         code = res['result']
     except:
-        log.debug(f"api error,{str(res)}")
+        print(f"api error,{str(res)}")
         code = "XXXX"
-    log.debug("apitruecaptcha code: %s" % code)
+    print("apitruecaptcha code: %s" % code)
     return code
 
 
@@ -89,8 +70,6 @@ def tly():
         signurl="https://tly.com/modules/_checkin.php?captcha="
         hearder={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36','Cookie':cookie}
         res1=scraper.get(url=captchaUrl,headers=hearder)
-        #base64_data = base64.b64encode(res1.content)
-        #oocr=imgcode_online('data:image/jpeg;base64,'+str(base64_data, 'utf-8'))
         oocr=apitruecaptcha(res1.content)
         res2=scraper.get(url=signurl+oocr.upper(),headers=hearder).text
         print(res2)
@@ -105,10 +84,4 @@ def main_handler(event, context):
 
 
 if __name__ == '__main__':
-
     tly()
-
-
-
-
-
