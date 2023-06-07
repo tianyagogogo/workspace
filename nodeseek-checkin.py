@@ -15,7 +15,7 @@ from datetime import datetime
 from typing import BinaryIO , Dict , List , Union
 
 
-local_cookies = os.environ["local_cookies"]
+local_cookies = os.environ["nodeseek_cookies"]
 
 def checkin():
     url="https://www.nodeseek.com/api/attendance?random=false";
