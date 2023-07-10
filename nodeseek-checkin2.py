@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 import random
 import traceback
 from fake_useragent import UserAgent
+import os
 
 
 username = os.environ["nodeseek_username"]
