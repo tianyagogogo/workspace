@@ -50,7 +50,7 @@ def is_valid_cookies() -> bool:
 
 # 进入thread0806
 def toThread0806Page():
-    sleep(0.2)
+    sleep(0.1)
     res = session.get(thread0806_url,headers = headers)
    
 # 进入签到页面
@@ -62,7 +62,7 @@ def toCheckinPage():
 
 
 def reply() -> None:
-    sleep(0.2)
+    sleep(0.1)
     title = get_title(checkin_url)
     content = reply_content
     tid = get_tid(checkin_url)
