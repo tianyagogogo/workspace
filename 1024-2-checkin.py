@@ -76,7 +76,7 @@ def reply() -> None:
         'atc_content': content ,
         'step': '2',
         'action': 'reply',
-        'fid': '7',
+        'fid': '23',
         'tid':  tid,
         'atc_attachment': 'none',
         'pid':'',
@@ -123,6 +123,6 @@ if __name__ == "__main__":
         sleep(sleep_time)
     load_cookies()
     is_valid_cookies()
-    toThread0806Page()
+    #toThread0806Page()
     #toCheckinPage()
     reply()
