@@ -118,7 +118,7 @@ if __name__ == "__main__":
     if today == '30' or today == '31':
         print("今天是"+today +"，不执行sleep！")
     else:
-        sleep_time = random.randint(200,800)
+        sleep_time = random.randint(50,800)
         print('休眠'+str(sleep_time)+'秒')
         sleep(sleep_time)
     load_cookies()
